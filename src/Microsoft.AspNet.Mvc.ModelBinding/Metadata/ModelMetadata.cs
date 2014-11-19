@@ -63,6 +63,12 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
         public virtual IReadOnlyList<string> BinderExcludeProperties { get; set; }
 
         /// <summary>
+        /// Represents the <see cref="Type"/> of an <see cref="IModelBinder"/> or an <see cref="IModelBinderProvider"/>
+        /// of a model if specified explicitly using <see cref="IBinderTypeProvider"/>.
+        /// </summary>
+        public virtual Type BinderType { get; set; }
+
+        /// <summary>
         /// Gets or sets a binder metadata for this model.
         /// </summary>
         public virtual IBinderMetadata BinderMetadata { get; set; }

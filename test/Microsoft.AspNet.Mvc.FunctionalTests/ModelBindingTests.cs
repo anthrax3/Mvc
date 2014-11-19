@@ -63,8 +63,8 @@ namespace Microsoft.AspNet.Mvc.FunctionalTests
 
             // Act
             var response = await client.PostAsync("http://localhost/Home/GetCustomer?Id=1234", content);
-           
-            //Assert
+
+            // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var customer = JsonConvert.DeserializeObject<Customer>(
                         await response.Content.ReadAsStringAsync());
@@ -780,6 +780,87 @@ namespace Microsoft.AspNet.Mvc.FunctionalTests
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
             Assert.Equal(string.Empty, await response.Content.ReadAsStringAsync());
+        }
+
+        [Fact]
+        public async Task CustomModelBinder_WithModelBinder_OnParameter()
+        {
+            // Arrange
+            var server = TestServer.Create(_services, _app);
+            var client = server.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(
+                "http://localhost/CustomModelBinder/GetBinderType_UseModelBinder");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(typeof(CustomTestModelBinder).FullName, await response.Content.ReadAsStringAsync());
+        }
+
+        [Fact]
+        public async Task CustomModelBinder_WithModelBinderProvider_OnParameter()
+        {
+            // Arrange
+            var server = TestServer.Create(_services, _app);
+            var client = server.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(
+                "http://localhost/CustomModelBinder/GetBinderType_UseModelBinderProvider");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(typeof(CustomTestModelBinder).FullName, await response.Content.ReadAsStringAsync());
+        }
+
+        [Fact]
+        public async Task CustomModelBinder_WithModelBinder_OnType()
+        {
+            // Arrange
+            var server = TestServer.Create(_services, _app);
+            var client = server.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(
+                "http://localhost/CustomModelBinder/GetBinderType_UseModelBinderOnType");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(typeof(CustomTestModelBinder).FullName, await response.Content.ReadAsStringAsync());
+        }
+
+        [Fact]
+        public async Task CustomModelBinder_WithModelBinderProvider_OnType()
+        {
+            // Arrange
+            var server = TestServer.Create(_services, _app);
+            var client = server.CreateClient();
+
+            // Act
+            var response = await client.GetAsync(
+                "http://localhost/CustomModelBinder/GetBinderType_UseModelBinderProviderOnType");
+
+            // Assert
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(typeof(CustomTestModelBinder).FullName, await response.Content.ReadAsStringAsync());
+        }
+
+        [Fact]
+        public async Task CustomModelBinder_WithNoBinderType_FallsBackOnDefaultModelBinders()
+        {
+            // Arrange
+            var server = TestServer.Create(_services, _app);
+            var client = server.CreateClient();
+
+            // Act
+            var response = await client.GetStringAsync("http://localhost/CustomModelBinder/GetCompany" +
+                "?customPrefix.Employees[0].Department=contoso");
+
+            // Assert
+            var company = JsonConvert.DeserializeObject<Company>(response);
+            Assert.NotNull(company.CEO); // Bound using TestModelBinder.
+            Assert.Equal("contoso", company.Employees[0].Department); // Bound using querystring value provider.
         }
     }
 }

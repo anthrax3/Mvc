@@ -35,6 +35,25 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
         {
         }
 
+        protected override Type ComputeBinderType()
+        {
+            if (PrototypeCache.BinderTypeProviders != null &&
+                PrototypeCache.BinderTypeProviders.Count != 0)
+            {
+                var binderTypeFirst = PrototypeCache.BinderTypeProviders[0].BinderType;
+
+                if (PrototypeCache.BinderTypeProviders.Count != 2)
+                {
+                    return binderTypeFirst;
+                }
+
+                var binderTypeOnType = PrototypeCache.BinderTypeProviders[1].BinderType;
+                return binderTypeFirst ?? binderTypeOnType;
+            }
+
+            return base.ComputeBinderType();
+        }
+
         protected override IBinderMetadata ComputeBinderMetadata()
         {
             return PrototypeCache.BinderMetadata != null

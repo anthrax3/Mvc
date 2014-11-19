@@ -23,6 +23,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             BinderMetadata = attributes.OfType<IBinderMetadata>().FirstOrDefault();
             BinderPropertyBindingInfo = attributes.OfType<IModelPropertyBindingInfo>().ToList();
             BinderModelNamePrefixProvider = attributes.OfType<IModelNameProvider>().FirstOrDefault();
+            BinderTypeProviders = attributes.OfType<IBinderTypeProvider>().ToList();
 
             // Special case the [DisplayFormat] attribute hanging off an applied [DataType] attribute. This property is
             // non-null for DataType.Currency, DataType.Date, DataType.Time, and potentially custom [DataType]
@@ -34,6 +35,12 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
                 DisplayFormat = DataType.DisplayFormat;
             }
         }
+
+        /// <summary>
+        /// Gets (or sets in subclasses) <see cref="IReadOnlyList{IBinderTypeProvider}"/> found in collection passed
+        /// to the <see cref="CachedDataAnnotationsMetadataAttributes(IEnumerable{object})"/> constructor, if any.
+        /// </summary>
+        public IReadOnlyList<IBinderTypeProvider> BinderTypeProviders { get; set; }
 
         /// <summary>
         /// Gets (or sets in subclasses) <see cref="IBinderMetadata"/> found in collection passed to the

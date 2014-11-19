@@ -1051,6 +1051,22 @@ namespace Microsoft.AspNet.Mvc.Core
         }
 
         /// <summary>
+        /// The type '{0}' must derive from either '{1}' or '{2}'.
+        /// </summary>
+        internal static string ModelBinderAttribute_TypeMustDeriveFromTypeOrType
+        {
+            get { return GetString("ModelBinderAttribute_TypeMustDeriveFromTypeOrType"); }
+        }
+
+        /// <summary>
+        /// The type '{0}' must derive from either '{1}' or '{2}'.
+        /// </summary>
+        internal static string FormatModelBinderAttribute_TypeMustDeriveFromTypeOrType(object p0, object p1, object p2)
+        {
+            return string.Format(CultureInfo.CurrentCulture, GetString("ModelBinderAttribute_TypeMustDeriveFromTypeOrType"), p0, p1, p2);
+        }
+
+        /// <summary>
         /// No encoding found for output formatter '{0}'. There must be at least one supported encoding registered in order for the output formatter to write content.
         /// </summary>
         internal static string OutputFormatterNoEncoding
@@ -1403,7 +1419,7 @@ namespace Microsoft.AspNet.Mvc.Core
         }
 
         /// <summary>
-        /// A method '{0}' must not define attribute routed actions and non attribute routed actions at the same time:{1}{2}{1}Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a route, or set a route template in all attributes that constrain HTTP verbs.
+        /// A method '{0}' must not define attribute routed actions and non attribute routed actions at the same time:{1}{2}{1}{1}Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a route, or set a route template in all attributes that constrain HTTP verbs.
         /// </summary>
         internal static string AttributeRoute_MixedAttributeAndConventionallyRoutedActions_ForMethod
         {
@@ -1411,7 +1427,7 @@ namespace Microsoft.AspNet.Mvc.Core
         }
 
         /// <summary>
-        /// A method '{0}' must not define attribute routed actions and non attribute routed actions at the same time:{1}{2}{1}Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a route, or set a route template in all attributes that constrain HTTP verbs.
+        /// A method '{0}' must not define attribute routed actions and non attribute routed actions at the same time:{1}{2}{1}{1}Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a route, or set a route template in all attributes that constrain HTTP verbs.
         /// </summary>
         internal static string FormatAttributeRoute_MixedAttributeAndConventionallyRoutedActions_ForMethod(object p0, object p1, object p2)
         {
