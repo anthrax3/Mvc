@@ -60,6 +60,7 @@ namespace Microsoft.AspNet.Mvc.Razor.Directives
             fileSystem.AddFile(@"x:\myapproot\_ViewStart.cs", string.Empty);
             fileSystem.AddFile(@"x:\myapproot\Views\_Layout.cshtml", string.Empty);
             fileSystem.AddFile(@"x:\myapproot\Views\home\_not-viewstart.cshtml", string.Empty);
+            fileSystem.AddFile(@"x:\myapproot\Views\Home\_viewstart.cshtml", string.Empty);
             var host = new MvcRazorHost(fileSystem);
             var utility = new ChunkInheritanceUtility(host, fileSystem, new Chunk[0]);
 

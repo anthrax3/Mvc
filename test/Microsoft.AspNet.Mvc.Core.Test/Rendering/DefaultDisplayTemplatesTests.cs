@@ -291,5 +291,22 @@ namespace Microsoft.AspNet.Mvc.Core
             var ex = Assert.Throws<ArgumentException>(() => helper.DisplayFor(m => m.Property1));
             Assert.Equal(expectedMessage, ex.Message);
         }
+
+        [Fact]
+        public void DefaultTemplates_DefaultPathNameCase()
+        {
+            // Arrange
+            var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
+            viewEngine
+                .Setup(v => v.FindPartialView(It.IsAny<ActionContext>(), 
+                                              It.Is<string>(view => view.Contains("DisplayTemplates"))))
+                .Returns(ViewEngineResult.Found(string.Empty, new Mock<IView>().Object))
+                .Verifiable();
+            var html = DefaultTemplatesUtilities.GetHtmlHelper(new object(), viewEngine: viewEngine.Object);
+
+            // Act & Assert
+            html.Display(string.Empty);
+            viewEngine.Verify();
+        }
     }
 }

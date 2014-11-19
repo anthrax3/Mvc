@@ -14,6 +14,11 @@ namespace Microsoft.AspNet.Mvc.Razor
     /// <summary>
     /// Represents a view engine that is used to render a page that uses the Razor syntax.
     /// </summary>
+    /// <remarks>
+    /// RazorViewEngine executes "_ViewStart.cshtml" inside the "Views" folder first, and then render the views 
+    /// under the following folders: "Views", "Areas/{AreaName}/Views", and "Views/Shared". 
+    /// Those default names are case-sensitive to support the case-sensitive file systems.
+    /// </remarks>
     public class RazorViewEngine : IViewEngine
     {
         private const string ViewExtension = ".cshtml";

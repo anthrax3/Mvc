@@ -13,6 +13,13 @@ using Microsoft.Framework.DependencyInjection;
 
 namespace Microsoft.AspNet.Mvc.Rendering
 {
+    /// <summary>
+    /// Contains methods which are used to generate the HTML controls from the given editor templates
+    /// </summary>
+    /// <remarks>
+    /// The user-provided editor templates should be located under the "EditorTemplates" folder. 
+    /// The folder name is case-sensitive to support the case-sensitive file systems.
+    /// </remarks>
     public static class DefaultEditorTemplates
     {
         private const string HtmlAttributeKey = "htmlAttributes";

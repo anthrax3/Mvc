@@ -503,6 +503,26 @@ namespace Microsoft.AspNet.Mvc.Razor.Test
             expander.Verify();
         }
 
+        [Theory]
+        [InlineData("Views")]
+        [InlineData("Areas")]
+        [InlineData("Shared")]
+        public void RazorViewEngine_DefaultPathNamesCase(string defaultPathName)
+        {
+            // Arrange
+            var viewEngine = CreateViewEngine() as RazorViewEngine;
+
+            // Act & Assert
+            var defaultPathFormats = viewEngine.ViewLocationFormats.Concat(viewEngine.AreaViewLocationFormats);
+
+            // Assert
+            foreach(var pathFormat in defaultPathFormats)
+            {
+                Assert.Equal(pathFormat.IndexOf(defaultPathName, StringComparison.InvariantCultureIgnoreCase),
+                             pathFormat.IndexOf(defaultPathName, StringComparison.InvariantCulture));
+            }
+        }
+
         private IViewEngine CreateViewEngine(IRazorPageFactory pageFactory = null,
                                              IRazorViewFactory viewFactory = null,
                                              IEnumerable<IViewLocationExpander> expanders = null,
