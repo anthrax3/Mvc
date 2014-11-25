@@ -12,7 +12,7 @@ using Xunit;
 
 namespace Microsoft.AspNet.Mvc.Razor
 {
-    public class CachedFileSystemTest
+    public class DefaultRazorFileSystemCacheTest
     {
         private const string FileName = "myView.cshtml";
 
@@ -330,7 +330,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             accessor.SetupGet(a => a.Options)
                     .Returns(options);
 
-            var cachedFileSystem = new CachedFileSystem(accessor.Object);
+            var cachedFileSystem = new DefaultRazorFileSystemCache(accessor.Object);
 
             // Act
             var result = cachedFileSystem.TryGetDirectoryContents("/test-path", out contents);
@@ -359,7 +359,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             accessor.SetupGet(a => a.Options)
                     .Returns(options);
 
-            var cachedFileSystem = new CachedFileSystem(accessor.Object);
+            var cachedFileSystem = new DefaultRazorFileSystemCache(accessor.Object);
 
             // Act
             var result = cachedFileSystem.TryGetParentPath("/test-path", out parentPath);
@@ -369,7 +369,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             fileSystem.Verify();
         }
 
-        public class ControllableExpiringFileInfoCache : CachedFileSystem
+        public class ControllableExpiringFileInfoCache : DefaultRazorFileSystemCache
         {
             public ControllableExpiringFileInfoCache(IOptions<RazorViewEngineOptions> optionsAccessor)
                 : base(optionsAccessor)
