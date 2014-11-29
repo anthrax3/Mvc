@@ -15,7 +15,7 @@ namespace Microsoft.AspNet.Mvc
     [DebuggerDisplay("{DebuggerString}")]
     internal sealed class BinaryBlob : IEquatable<BinaryBlob>
     {
-        private static readonly RandomNumberGenerator _randomNumberGenerator = RandomNumberGenerator.Create();
+        private static readonly RandomNumberGenerator RandomNumberGenerator = RandomNumberGenerator.Create();
         private readonly byte[] _data;
 
         // Generates a new token using a specified bit length.
@@ -92,7 +92,7 @@ namespace Microsoft.AspNet.Mvc
         private static byte[] GenerateNewToken(int bitLength)
         {
             var data = new byte[bitLength / 8];
-            _randomNumberGenerator.GetBytes(data);
+            RandomNumberGenerator.GetBytes(data);
             return data;
         }
 

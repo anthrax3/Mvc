@@ -22,20 +22,20 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
         // A factory for validators based on ValidationAttribute.
         internal delegate IModelValidator DataAnnotationsModelValidationFactory(ValidationAttribute attribute);
 
-        // A factory for validators based on IValidatableObject
-        private delegate IModelValidator DataAnnotationsValidatableObjectAdapterFactory();
+        // Factories for validation attributes
+        private static readonly DataAnnotationsModelValidationFactory DefaultAttributeFactory =
+            (attribute) => new DataAnnotationsModelValidator(attribute);
+
+        // Factories for IValidatableObject models
+        private static readonly DataAnnotationsValidatableObjectAdapterFactory DefaultValidatableFactory =
+            () => new ValidatableObjectAdapter();
 
         private static bool _addImplicitRequiredAttributeForValueTypes = true;
         private readonly Dictionary<Type, DataAnnotationsModelValidationFactory> _attributeFactories =
             BuildAttributeFactoriesDictionary();
 
-        // Factories for validation attributes
-        private static readonly DataAnnotationsModelValidationFactory _defaultAttributeFactory =
-            (attribute) => new DataAnnotationsModelValidator(attribute);
-
-        // Factories for IValidatableObject models
-        private static readonly DataAnnotationsValidatableObjectAdapterFactory _defaultValidatableFactory =
-            () => new ValidatableObjectAdapter();
+        // A factory for validators based on IValidatableObject
+        private delegate IModelValidator DataAnnotationsValidatableObjectAdapterFactory();
 
         internal Dictionary<Type, DataAnnotationsModelValidationFactory> AttributeFactories
         {
@@ -59,7 +59,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
                 DataAnnotationsModelValidationFactory factory;
                 if (!_attributeFactories.TryGetValue(attribute.GetType(), out factory))
                 {
-                    factory = _defaultAttributeFactory;
+                    factory = DefaultAttributeFactory;
                 }
                 results.Add(factory(attribute));
             }
@@ -67,7 +67,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             // Produce a validator if the type supports IValidatableObject
             if (typeof(IValidatableObject).IsAssignableFrom(metadata.ModelType))
             {
-                results.Add(_defaultValidatableFactory());
+                results.Add(DefaultValidatableFactory());
             }
 
             return results;

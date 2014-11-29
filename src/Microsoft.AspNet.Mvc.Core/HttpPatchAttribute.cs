@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class HttpPatchAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new string[] { "PATCH" };
+        private static readonly IEnumerable<string> SupportedMethods = new string[] { "PATCH" };
 
         /// <summary>
         /// Creates a new <see cref="HttpPatchAttribute"/>.
         /// </summary>
         public HttpPatchAttribute()
-            : base(_supportedMethods)
+            : base(SupportedMethods)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
         public HttpPatchAttribute([NotNull] string template)
-            : base(_supportedMethods, template)
+            : base(SupportedMethods, template)
         {
         }
     }

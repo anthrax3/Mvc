@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNet.Http;
 
 namespace Microsoft.AspNet.Mvc.ModelBinding
 {
@@ -13,8 +12,8 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
     /// </summary>
     public class ModelBindingContext
     {
-        private static readonly Func<ModelBindingContext, string, bool> 
-            _defaultPropertyFilter = (context, propertyName) => true;
+        private static readonly Func<ModelBindingContext, string, bool> DefaultPropertyFilter =
+            (context, propertyName) => true;
 
         private string _modelName;
         private ModelStateDictionary _modelState;
@@ -53,7 +52,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
         }
 
         /// <summary>
-        /// Represents the <see cref="OperationBindingContext"/> associated with this context. 
+        /// Represents the <see cref="OperationBindingContext"/> associated with this context.
         /// </summary>
         public OperationBindingContext OperationBindingContext { get; set; }
 
@@ -168,7 +167,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             {
                 if (_propertyFilter == null)
                 {
-                    _propertyFilter = _defaultPropertyFilter;
+                    _propertyFilter = DefaultPropertyFilter;
                 }
                 return _propertyFilter;
             }

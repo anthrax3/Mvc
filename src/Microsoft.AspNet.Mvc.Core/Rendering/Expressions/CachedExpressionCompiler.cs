@@ -23,13 +23,13 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
 
         private static class Compiler<TIn, TOut>
         {
-            private static Func<TIn, TOut> _identityFunc;
-
-            private static readonly ConcurrentDictionary<MemberInfo, Func<TIn, TOut>> _simpleMemberAccessDict =
+            private static readonly ConcurrentDictionary<MemberInfo, Func<TIn, TOut>> SimpleMemberAccessDict =
                 new ConcurrentDictionary<MemberInfo, Func<TIn, TOut>>();
 
-            private static readonly ConcurrentDictionary<MemberInfo, Func<object, TOut>> _constMemberAccessDict =
+            private static readonly ConcurrentDictionary<MemberInfo, Func<object, TOut>> ConstMemberAccessDict =
                 new ConcurrentDictionary<MemberInfo, Func<object, TOut>>();
+
+            private static Func<TIn, TOut> _identityFunc;
 
             public static Func<TIn, TOut> Compile([NotNull] Expression<Func<TIn, TOut>> expr)
             {
@@ -85,14 +85,14 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
                     if (memberExpr.Expression == expr.Parameters[0] || memberExpr.Expression == null)
                     {
                         // model => model.Member or model => StaticMember
-                        return _simpleMemberAccessDict.GetOrAdd(memberExpr.Member, _ => expr.Compile());
+                        return SimpleMemberAccessDict.GetOrAdd(memberExpr.Member, _ => expr.Compile());
                     }
 
                     var constExpr = memberExpr.Expression as ConstantExpression;
                     if (constExpr != null)
                     {
                         // model => {const}.Member (captured local variable)
-                        var del = _constMemberAccessDict.GetOrAdd(memberExpr.Member, _ =>
+                        var del = ConstMemberAccessDict.GetOrAdd(memberExpr.Member, _ =>
                         {
                             // rewrite as capturedLocal => ((TDeclaringType)capturedLocal).Member
                             var constParamExpr = Expression.Parameter(typeof(object), "capturedLocal");

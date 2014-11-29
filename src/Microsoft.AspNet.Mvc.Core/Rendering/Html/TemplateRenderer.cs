@@ -17,7 +17,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
         private static readonly string DisplayTemplateViewPath = "DisplayTemplates";
         private static readonly string EditorTemplateViewPath = "EditorTemplates";
 
-        private static readonly Dictionary<string, Func<IHtmlHelper, string>> _defaultDisplayActions =
+        private static readonly Dictionary<string, Func<IHtmlHelper, string>> DefaultDisplayActions =
             new Dictionary<string, Func<IHtmlHelper, string>>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Collection", DefaultDisplayTemplates.CollectionTemplate },
@@ -32,7 +32,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 { typeof(object).Name, DefaultDisplayTemplates.ObjectTemplate },
             };
 
-        private static readonly Dictionary<string, Func<IHtmlHelper, string>> _defaultEditorActions =
+        private static readonly Dictionary<string, Func<IHtmlHelper, string>> DefaultEditorActions =
             new Dictionary<string, Func<IHtmlHelper, string>>(StringComparer.OrdinalIgnoreCase)
             {
                 { "Collection", DefaultEditorTemplates.CollectionTemplate },
@@ -118,7 +118,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
 
         private Dictionary<string, Func<IHtmlHelper, string>> GetDefaultActions()
         {
-            return _readOnly ? _defaultDisplayActions : _defaultEditorActions;
+            return _readOnly ? DefaultDisplayActions : DefaultEditorActions;
         }
 
         private IEnumerable<string> GetViewNames()

@@ -15,7 +15,7 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public sealed class AntiForgery
     {
-        private static readonly string _purpose = "Microsoft.AspNet.Mvc.AntiXsrf.AntiForgeryToken.v1";
+        private static readonly string Purpose = "Microsoft.AspNet.Mvc.AntiXsrf.AntiForgeryToken.v1";
         private readonly AntiForgeryWorker _worker;
 
         public AntiForgery([NotNull] IClaimUidExtractor claimUidExtractor,
@@ -24,7 +24,7 @@ namespace Microsoft.AspNet.Mvc
                            [NotNull] IOptions<MvcOptions> mvcOptions)
         {
             var config = mvcOptions.Options.AntiForgeryOptions;
-            var serializer = new AntiForgeryTokenSerializer(dataProtectionProvider.CreateProtector(_purpose));
+            var serializer = new AntiForgeryTokenSerializer(dataProtectionProvider.CreateProtector(Purpose));
             var tokenStore = new AntiForgeryTokenStore(config, serializer);
             var tokenProvider = new TokenProvider(config, claimUidExtractor, additionalDataProvider);
             _worker = new AntiForgeryWorker(serializer, config, tokenStore, tokenProvider, tokenProvider);

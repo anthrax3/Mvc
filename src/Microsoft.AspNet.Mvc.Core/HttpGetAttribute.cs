@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class HttpGetAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new string[] { "GET" };
+        private static readonly IEnumerable<string> SupportedMethods = new string[] { "GET" };
 
         /// <summary>
         /// Creates a new <see cref="HttpGetAttribute"/>.
         /// </summary>
         public HttpGetAttribute()
-            : base(_supportedMethods)
+            : base(SupportedMethods)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
         public HttpGetAttribute([NotNull] string template)
-            : base(_supportedMethods, template)
+            : base(SupportedMethods, template)
         {
         }
     }

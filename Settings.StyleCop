@@ -274,6 +274,11 @@
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>
         </Rule>
+        <Rule Name="PrefixCallsCorrectly">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
         <Rule Name="PrefixLocalCallsWithThis">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>

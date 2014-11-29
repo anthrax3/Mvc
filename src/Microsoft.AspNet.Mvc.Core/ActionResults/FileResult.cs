@@ -84,7 +84,7 @@ namespace Microsoft.AspNet.Mvc
             {
                 builder.Append('%');
 
-                int i = b;
+                var i = b;
                 AddHexDigitToStringBuilder(i >> 4, builder);
                 AddHexDigitToStringBuilder(i % 16, builder);
             }
@@ -217,15 +217,15 @@ namespace Microsoft.AspNet.Mvc
             private static string GetRfc2047Base64EncodedWord(string fileName)
             {
                 // See RFC 2047 for details. Section 8 for examples.
-                const string charset = "utf-8";
+                const string Charset = "utf-8";
                 // B means Base64
-                const string encoding = "B";
+                const string Encoding = "B";
 
-                var fileNameBytes = Encoding.UTF8.GetBytes(fileName);
+                var fileNameBytes = System.Text.Encoding.UTF8.GetBytes(fileName);
                 var base64EncodedFileName = Convert.ToBase64String(fileNameBytes);
 
                 // Encoded words are defined as "=?{charset}?{encoding}?{encpoded value}?="
-                return string.Format("\"=?{0}?{1}?{2}?=\"", charset, encoding, base64EncodedFileName);
+                return string.Format("\"=?{0}?{1}?{2}?=\"", Charset, Encoding, base64EncodedFileName);
             }
 
             // Application of RFC 2231 Encoding to Hypertext Transfer Protocol (HTTP) Header Fields, sec. 3.2

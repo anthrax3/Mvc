@@ -13,7 +13,7 @@ namespace Microsoft.AspNet.Mvc
 {
     public static class ControllerActionExecutor
     {
-        private static readonly MethodInfo _convertOfTMethod =
+        private static readonly MethodInfo ConvertOfTMethod =
             typeof(ControllerActionExecutor).GetRuntimeMethods().Single(methodInfo => methodInfo.Name == "Convert");
 
         // Method called via reflection.
@@ -83,7 +83,7 @@ namespace Microsoft.AspNet.Mvc
                 {
                     // for: public Task<T> Action()
                     // constructs: return (Task<object>)Convert<T>((Task<T>)result)
-                    var genericMethodInfo = _convertOfTMethod.MakeGenericMethod(taskValueType);
+                    var genericMethodInfo = ConvertOfTMethod.MakeGenericMethod(taskValueType);
                     var convertedResult = (Task<object>)genericMethodInfo.Invoke(null, new object[] { result });
                     return convertedResult;
                 }

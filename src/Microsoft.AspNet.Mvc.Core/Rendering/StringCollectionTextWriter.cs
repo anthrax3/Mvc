@@ -17,7 +17,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
     /// </remarks>
     public class StringCollectionTextWriter : TextWriter
     {
-        private static readonly Task _completedTask = Task.FromResult(0);
+        private static readonly Task CompletedTask = Task.FromResult(0);
         private readonly Encoding _encoding;
 
         /// <summary>
@@ -77,21 +77,21 @@ namespace Microsoft.AspNet.Mvc.Rendering
         public override Task WriteAsync(char value)
         {
             Write(value);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
         public override Task WriteAsync([NotNull] char[] buffer, int index, int count)
         {
             Write(buffer, index, count);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
         public override Task WriteAsync(string value)
         {
             Write(value);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
@@ -111,28 +111,28 @@ namespace Microsoft.AspNet.Mvc.Rendering
         public override Task WriteLineAsync(char value)
         {
             WriteLine(value);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
         public override Task WriteLineAsync(char[] value, int start, int offset)
         {
             WriteLine(value, start, offset);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
         public override Task WriteLineAsync(string value)
         {
             WriteLine(value);
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
         public override Task WriteLineAsync()
         {
             WriteLine();
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />
@@ -162,7 +162,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 return WriteListAsync(writer, Buffer);
             }
 
-            return _completedTask;
+            return CompletedTask;
         }
 
         /// <inheritdoc />

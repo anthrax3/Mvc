@@ -8,13 +8,13 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
 {
     internal class ReferenceEqualityComparer : IEqualityComparer<object>
     {
-        private static readonly ReferenceEqualityComparer _instance = new ReferenceEqualityComparer();
+        private static readonly ReferenceEqualityComparer Comparer = new ReferenceEqualityComparer();
 
         public static ReferenceEqualityComparer Instance
         {
             get
             {
-                return _instance;
+                return Comparer;
             }
         }
 

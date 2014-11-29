@@ -11,7 +11,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
 {
     public class ValueProviderResult
     {
-        private static readonly CultureInfo _staticCulture = CultureInfo.InvariantCulture;
+        private static readonly CultureInfo StaticCulture = CultureInfo.InvariantCulture;
         private CultureInfo _instanceCulture;
 
         // default constructor so that subclassed types can set the properties themselves
@@ -34,7 +34,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             {
                 if (_instanceCulture == null)
                 {
-                    _instanceCulture = _staticCulture;
+                    _instanceCulture = StaticCulture;
                 }
                 return _instanceCulture;
             }

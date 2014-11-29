@@ -19,7 +19,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
     public class InputTagHelper : TagHelper
     {
         // Mapping from datatype names and data annotation hints to values for the <input/> element's "type" attribute.
-        private static readonly Dictionary<string, string> _defaultInputTypes =
+        private static readonly Dictionary<string, string> DefaultInputTypes =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
                 { "HiddenInput", InputType.Hidden.ToString().ToLowerInvariant() },
@@ -44,7 +44,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             };
 
         // Mapping from <input/> element's type to RFC 3339 date and time formats.
-        private static readonly Dictionary<string, string> _rfc3339Formats =
+        private static readonly Dictionary<string, string> Rfc3339Formats =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
                 { "date", "{0:yyyy-MM-dd}" },
@@ -297,7 +297,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                 // EditFormatString has precedence over this fall-back format.
                 format = "{0:0.00}";
             }
-            else if (_rfc3339Formats.TryGetValue(inputType, out rfc3339Format) &&
+            else if (Rfc3339Formats.TryGetValue(inputType, out rfc3339Format) &&
                 ViewContext.Html5DateRenderingMode == Html5DateRenderingMode.Rfc3339 &&
                 !metadata.HasNonDefaultEditFormat &&
                 (typeof(DateTime) == metadata.RealModelType || typeof(DateTimeOffset) == metadata.RealModelType))
@@ -320,7 +320,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
             foreach (var hint in GetInputTypeHints(metadata))
             {
                 string inputType;
-                if (_defaultInputTypes.TryGetValue(hint, out inputType))
+                if (DefaultInputTypes.TryGetValue(hint, out inputType))
                 {
                     inputTypeHint = hint;
                     return inputType;

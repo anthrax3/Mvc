@@ -9,11 +9,11 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class EmptyResult : ActionResult
     {
-        private static readonly EmptyResult _singleton = new EmptyResult();
+        private static readonly EmptyResult Singleton = new EmptyResult();
 
         internal static EmptyResult Instance
         {
-            get { return _singleton; }
+            get { return Singleton; }
         }
 
         /// <inheritdoc />

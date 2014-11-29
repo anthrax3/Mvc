@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class HttpPutAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new string[] { "PUT" };
+        private static readonly IEnumerable<string> SupportedMethods = new string[] { "PUT" };
 
         /// <summary>
         /// Creates a new <see cref="HttpPutAttribute"/>.
         /// </summary>
         public HttpPutAttribute()
-            : base(_supportedMethods)
+            : base(SupportedMethods)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
         public HttpPutAttribute([NotNull] string template)
-            : base(_supportedMethods, template)
+            : base(SupportedMethods, template)
         {
         }
     }

@@ -7,11 +7,11 @@ namespace Microsoft.AspNet.Mvc
 {
     public class FilterItemOrderComparer : IComparer<FilterItem>
     {
-        private static readonly FilterItemOrderComparer _comparer = new FilterItemOrderComparer();
+        private static readonly FilterItemOrderComparer Instance = new FilterItemOrderComparer();
 
         public static FilterItemOrderComparer Comparer
         {
-            get { return _comparer; }
+            get { return Instance; }
         }
 
         public int Compare([NotNull] FilterItem x, [NotNull] FilterItem y)

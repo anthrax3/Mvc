@@ -11,12 +11,12 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
 {
     public static class TryGetValueProvider
     {
-        private static readonly Dictionary<Type, TryGetValueDelegate> _tryGetValueDelegateCache =
+        private static readonly Dictionary<Type, TryGetValueDelegate> TryGetValueDelegateCache =
             new Dictionary<Type, TryGetValueDelegate>();
-        private static readonly ReaderWriterLockSlim _tryGetValueDelegateCacheLock = new ReaderWriterLockSlim();
+        private static readonly ReaderWriterLockSlim TryGetValueDelegateCacheLock = new ReaderWriterLockSlim();
 
         // Information about private static method declared below.
-        private static readonly MethodInfo _strongTryGetValueImplInfo =
+        private static readonly MethodInfo StrongTryGetValueImplInfo =
             typeof(TryGetValueProvider).GetTypeInfo().GetDeclaredMethod("StrongTryGetValueImpl");
 
         public static TryGetValueDelegate CreateInstance([NotNull] Type targetType)
@@ -24,17 +24,17 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
             TryGetValueDelegate result;
 
             // Cache delegates since properties of model types are re-evaluated numerous times.
-            _tryGetValueDelegateCacheLock.EnterReadLock();
+            TryGetValueDelegateCacheLock.EnterReadLock();
             try
             {
-                if (_tryGetValueDelegateCache.TryGetValue(targetType, out result))
+                if (TryGetValueDelegateCache.TryGetValue(targetType, out result))
                 {
                     return result;
                 }
             }
             finally
             {
-                _tryGetValueDelegateCacheLock.ExitReadLock();
+                TryGetValueDelegateCacheLock.ExitReadLock();
             }
 
             var dictionaryType = targetType.ExtractGenericInterface(typeof(IDictionary<,>));
@@ -49,7 +49,7 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
 
                 if (keyType.IsAssignableFrom(typeof(string)))
                 {
-                    var implementationMethod = _strongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
+                    var implementationMethod = StrongTryGetValueImplInfo.MakeGenericMethod(keyType, returnType);
                     result = (TryGetValueDelegate)implementationMethod.CreateDelegate(typeof(TryGetValueDelegate));
                 }
             }
@@ -60,14 +60,14 @@ namespace Microsoft.AspNet.Mvc.Rendering.Expressions
                 result = TryGetValueFromNonGenericDictionary;
             }
 
-            _tryGetValueDelegateCacheLock.EnterWriteLock();
+            TryGetValueDelegateCacheLock.EnterWriteLock();
             try
             {
-                _tryGetValueDelegateCache[targetType] = result;
+                TryGetValueDelegateCache[targetType] = result;
             }
             finally
             {
-                _tryGetValueDelegateCacheLock.ExitWriteLock();
+                TryGetValueDelegateCacheLock.ExitWriteLock();
             }
 
             return result;

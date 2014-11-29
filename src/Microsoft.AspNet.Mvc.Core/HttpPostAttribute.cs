@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class HttpPostAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new string[] { "POST" };
+        private static readonly IEnumerable<string> SupportedMethods = new string[] { "POST" };
 
         /// <summary>
         /// Creates a new <see cref="HttpPostAttribute"/>.
         /// </summary>
         public HttpPostAttribute()
-            : base(_supportedMethods)
+            : base(SupportedMethods)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
         public HttpPostAttribute([NotNull] string template)
-            : base(_supportedMethods, template)
+            : base(SupportedMethods, template)
         {
         }
     }

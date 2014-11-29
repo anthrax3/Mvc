@@ -16,7 +16,7 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     internal class StringWithQualityHeaderValueComparer : IComparer<StringWithQualityHeaderValue>
     {
-        private static readonly StringWithQualityHeaderValueComparer _qualityComparer =
+        private static readonly StringWithQualityHeaderValueComparer Instance =
             new StringWithQualityHeaderValueComparer();
 
         private StringWithQualityHeaderValueComparer()
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
 
         public static StringWithQualityHeaderValueComparer QualityComparer
         {
-            get { return _qualityComparer; }
+            get { return Instance; }
         }
 
         /// <summary>

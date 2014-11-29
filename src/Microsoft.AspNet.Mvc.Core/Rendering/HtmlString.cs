@@ -7,7 +7,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
 {
     public class HtmlString
     {
-        private static readonly HtmlString _empty = new HtmlString(string.Empty);
+        private static readonly HtmlString EmptyInstance = new HtmlString(string.Empty);
 
         private readonly StringCollectionTextWriter _writer;
         private readonly string _input;
@@ -30,7 +30,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
         {
             get
             {
-                return _empty;
+                return EmptyInstance;
             }
         }
 

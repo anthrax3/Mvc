@@ -19,13 +19,13 @@ namespace Microsoft.AspNet.Mvc.Razor
         internal const string ControllerKey = "controller";
         internal const string AreaKey = "area";
 
-        private static readonly IEnumerable<string> _viewLocationFormats = new[]
+        private static readonly IEnumerable<string> DefaultViewLocationFormats = new[]
         {
             "/Views/{1}/{0}" + ViewExtension,
             "/Views/Shared/{0}" + ViewExtension,
         };
 
-        private static readonly IEnumerable<string> _areaViewLocationFormats = new[]
+        private static readonly IEnumerable<string> DefaultAreaViewLocationFormats = new[]
         {
             "/Areas/{2}/Views/{1}/{0}" + ViewExtension,
             "/Areas/{2}/Views/Shared/{0}" + ViewExtension,
@@ -57,7 +57,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         /// </summary>
         public virtual IEnumerable<string> ViewLocationFormats
         {
-            get { return _viewLocationFormats; }
+            get { return DefaultViewLocationFormats; }
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         /// </summary>
         public virtual IEnumerable<string> AreaViewLocationFormats
         {
-            get { return _areaViewLocationFormats; }
+            get { return DefaultAreaViewLocationFormats; }
         }
 
         /// <inheritdoc />

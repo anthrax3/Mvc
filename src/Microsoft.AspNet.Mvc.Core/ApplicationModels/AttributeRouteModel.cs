@@ -11,7 +11,7 @@ namespace Microsoft.AspNet.Mvc.ApplicationModels
 {
     public class AttributeRouteModel
     {
-        private static readonly AttributeRouteModel _default = new AttributeRouteModel();
+        private static readonly AttributeRouteModel Default = new AttributeRouteModel();
 
         public AttributeRouteModel()
         {
@@ -63,13 +63,13 @@ namespace Microsoft.AspNet.Mvc.ApplicationModels
             AttributeRouteModel left,
             AttributeRouteModel right)
         {
-            right = right ?? _default;
+            right = right ?? Default;
 
             // If the right template is an override template (starts with / or ~/)
             // we ignore the values from left.
             if (left == null || IsOverridePattern(right.Template))
             {
-                left = _default;
+                left = Default;
             }
 
             var combinedTemplate = CombineTemplates(left.Template, right.Template);

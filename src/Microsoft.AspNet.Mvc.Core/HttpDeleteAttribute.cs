@@ -10,13 +10,13 @@ namespace Microsoft.AspNet.Mvc
     /// </summary>
     public class HttpDeleteAttribute : HttpMethodAttribute
     {
-        private static readonly IEnumerable<string> _supportedMethods = new string[] { "DELETE" };
+        private static readonly IEnumerable<string> SupportedMethods = new string[] { "DELETE" };
 
         /// <summary>
         /// Creates a new <see cref="HttpDeleteAttribute"/>.
         /// </summary>
         public HttpDeleteAttribute()
-            : base(_supportedMethods)
+            : base(SupportedMethods)
         {
         }
 
@@ -25,7 +25,7 @@ namespace Microsoft.AspNet.Mvc
         /// </summary>
         /// <param name="template">The route template. May not be null.</param>
         public HttpDeleteAttribute([NotNull] string template)
-            : base(_supportedMethods, template)
+            : base(SupportedMethods, template)
         {
         }
     }

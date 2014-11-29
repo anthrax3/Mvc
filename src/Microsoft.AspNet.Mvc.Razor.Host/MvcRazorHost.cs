@@ -16,7 +16,7 @@ namespace Microsoft.AspNet.Mvc.Razor
     public class MvcRazorHost : RazorEngineHost, IMvcRazorHost
     {
         private const string BaseType = "Microsoft.AspNet.Mvc.Razor.RazorPage";
-        private static readonly string[] _defaultNamespaces = new[]
+        private static readonly string[] DefaultNamespaces = new[]
         {
             "System",
             "System.Linq",
@@ -24,7 +24,7 @@ namespace Microsoft.AspNet.Mvc.Razor
             "Microsoft.AspNet.Mvc",
             "Microsoft.AspNet.Mvc.Rendering",
         };
-        private static readonly Chunk[] _defaultInheritedChunks = new[]
+        private static readonly Chunk[] DefaultDefaultInheritedChunks = new[]
         {
             new InjectChunk("Microsoft.AspNet.Mvc.Rendering.IHtmlHelper<TModel>", "Html"),
             new InjectChunk("Microsoft.AspNet.Mvc.IViewComponentHelper", "Component"),
@@ -49,6 +49,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         {
         }
 #endif
+
         /// <summary>
         /// Initializes a new instance of <see cref="MvcRazorHost"/> using the specified <paramref name="fileSystem"/>.
         /// </summary>
@@ -103,7 +104,7 @@ namespace Microsoft.AspNet.Mvc.Razor
                 EndContextMethodName = "EndContext"
             };
 
-            foreach (var ns in _defaultNamespaces)
+            foreach (var ns in DefaultNamespaces)
             {
                 NamespaceImports.Add(ns);
             }
@@ -129,7 +130,7 @@ namespace Microsoft.AspNet.Mvc.Razor
         /// </summary>
         public virtual IReadOnlyList<Chunk> DefaultInheritedChunks
         {
-            get { return _defaultInheritedChunks; }
+            get { return DefaultDefaultInheritedChunks; }
         }
 
         /// <summary>
