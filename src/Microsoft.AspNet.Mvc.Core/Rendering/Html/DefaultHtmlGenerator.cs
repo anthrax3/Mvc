@@ -101,7 +101,7 @@ namespace Microsoft.AspNet.Mvc.Rendering
                 if (metadata.Model != null)
                 {
                     bool modelChecked;
-                    if (Boolean.TryParse(metadata.Model.ToString(), out modelChecked))
+                    if (bool.TryParse(metadata.Model.ToString(), out modelChecked))
                     {
                         isChecked = modelChecked;
                     }

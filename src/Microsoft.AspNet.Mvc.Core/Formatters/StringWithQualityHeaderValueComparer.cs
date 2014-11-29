@@ -54,13 +54,13 @@ namespace Microsoft.AspNet.Mvc
                 return 1;
             }
 
-            if (!String.Equals(stringWithQuality1.Value, stringWithQuality2.Value, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(stringWithQuality1.Value, stringWithQuality2.Value, StringComparison.OrdinalIgnoreCase))
             {
-                if (String.Equals(stringWithQuality1.Value, "*", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(stringWithQuality1.Value, "*", StringComparison.OrdinalIgnoreCase))
                 {
                     return -1;
                 }
-                else if (String.Equals(stringWithQuality2.Value, "*", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(stringWithQuality2.Value, "*", StringComparison.OrdinalIgnoreCase))
                 {
                     return 1;
                 }

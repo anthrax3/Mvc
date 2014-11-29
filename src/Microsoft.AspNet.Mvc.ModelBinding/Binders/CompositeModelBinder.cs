@@ -176,8 +176,8 @@ namespace Microsoft.AspNet.Mvc.ModelBinding
             // We need to throw if there are multiple models which can cause body to be read multiple times.
             // Reading form data multiple times is ok since we cache form data. For the models marked to read using
             // formatters, multiple reads are not allowed.
-            if (oldState == BodyBindingState.FormatterBased && currentModelNeedsToReadBody ||
-                oldState == BodyBindingState.FormBased && newIsFormatterBasedMetadataFound)
+            if ((oldState == BodyBindingState.FormatterBased && currentModelNeedsToReadBody) ||
+                (oldState == BodyBindingState.FormBased && newIsFormatterBasedMetadataFound))
             {
                 throw new InvalidOperationException(Resources.MultipleBodyParametersOrPropertiesAreNotAllowed);
             }

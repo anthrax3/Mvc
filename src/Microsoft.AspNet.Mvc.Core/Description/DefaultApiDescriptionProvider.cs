@@ -197,7 +197,7 @@ namespace Microsoft.AspNet.Mvc.Description
 
             foreach (var segment in parsedTemplate.Segments)
             {
-                var currentSegment = "";
+                var currentSegment = string.Empty;
                 foreach (var part in segment.Parts)
                 {
                     if (part.IsLiteral)

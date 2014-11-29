@@ -18,16 +18,17 @@ namespace Microsoft.AspNet.PageExecutionInstrumentation
         /// </summary>
         /// <param name="writer">The output <see cref="TextWriter"/> for the web page.</param>
         /// <returns>A <see cref="TextWriter"/> that wraps <paramref name="writer"/>.</returns>
-        /// <remarks>
         TextWriter DecorateWriter(TextWriter writer);
 
         /// <summary>
-        /// Creates a <see cref="IPageExecutionContext"/> for the specified <paramref name="sourceFilePath"/>.
+        /// Creates an <see cref="IPageExecutionContext"/> for the specified <paramref name="sourceFilePath"/>.
         /// </summary>
         /// <param name="sourceFilePath">The path of the <see cref="Mvc.Razor.IRazorPage"/>.</param>
         /// <param name="writer">The <see cref="TextWriter"/> obtained from <see cref="DecorateWriter(TextWriter)"/>.
         /// </param>
-        /// <returns></returns>
+        /// <returns>
+        /// An <see cref="IPageExecutionContext"/> for the specified <paramref name="sourceFilePath"/>.
+        /// </returns>
         IPageExecutionContext GetContext(string sourceFilePath, TextWriter writer);
     }
 }

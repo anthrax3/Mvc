@@ -399,7 +399,7 @@ namespace Microsoft.AspNet.Mvc.TagHelpers
                         break;
                     }
 
-                    if (isEnumerable && fieldType == typeof(Object))
+                    if (isEnumerable && fieldType == typeof(object))
                     {
                         yield return "Collection";
                     }

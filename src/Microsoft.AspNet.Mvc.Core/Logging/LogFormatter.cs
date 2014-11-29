@@ -31,7 +31,7 @@ namespace Microsoft.AspNet.Mvc.Logging
                 return e.ToString();
             }
 
-            return "";
+            return string.Empty;
         }
     }
 }

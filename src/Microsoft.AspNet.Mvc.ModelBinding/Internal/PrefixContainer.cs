@@ -186,7 +186,7 @@ namespace Microsoft.AspNet.Mvc.ModelBinding.Internal
             }
         }
 
-        private sealed class PrefixComparer : IComparer<String>
+        private sealed class PrefixComparer : IComparer<string>
         {
             private readonly string _prefix;
 
